@@ -71,5 +71,11 @@ public class Acciones implements Serializable {
 	public void setGROUPID(Integer gROUPID) {
 		GROUPID = gROUPID;
 	}
+	public Set<Herramientas> getHerramientas() {
+		return herramientas;
+	}
+	public void setHerramientas(Set<Herramientas> herramientas) {
+		this.herramientas = herramientas;
+	}
    
 }
