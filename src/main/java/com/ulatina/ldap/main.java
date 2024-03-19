@@ -73,7 +73,7 @@ public class main {
             
             Herramientas herramienta2 = servicioHerramienta.obtenerHerramientaPorId(2);
             Acciones accns1 = servicioAccion1.obtenerAccionPorId(1);
-            servicioHerramienta.insertarHerramientaAccion(herramienta2, accns1);
+            //servicioHerramienta.insertarHerramientaAccion(herramienta2, accns1);
             
             
             
