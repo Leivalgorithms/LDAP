@@ -3,7 +3,9 @@ package com.ulatina.ldap;
 import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -29,13 +31,11 @@ public class Herramientas implements Serializable {
 	private boolean ESTADO;
 	private Integer GROUPID;
 	
-	/*
-	@ManyToOne
-	@JoinColumn(name = "idAplicacion")	
-	private Aplicaciones aplicacion;
-	@OneToMany(mappedBy="herramienta", cascade = CascadeType.ALL, orphanRemoval = true ,fetch = FetchType.LAZY)
-	private Set<Acciones> accion;
-	*/
+	
+	@ManyToMany(mappedBy = "herramientas")
+    private List<Aplicaciones> aplicaciaones = new ArrayList<>();
+	
+	
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
@@ -84,5 +84,11 @@ public class Herramientas implements Serializable {
 	public void setGROUPID(Integer gROUPID) {
 		GROUPID = gROUPID;
 	}
-   
+	
+	public List<Aplicaciones> getAplicaciaones() {
+		return aplicaciaones;
+	}
+	public void setAplicaciaones(List<Aplicaciones> aplicaciaones) {
+		this.aplicaciaones = aplicaciaones;
+	}
 }

@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/javassist-3.12.0.GA.jar"/>
 	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/jta-1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/slf4j-api-1.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/mysql-connector-java-8.0.29.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

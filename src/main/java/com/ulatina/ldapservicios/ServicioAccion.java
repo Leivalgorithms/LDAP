@@ -3,6 +3,8 @@ package com.ulatina.ldapservicios;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import com.ulatina.ldap.Acciones;
+import com.ulatina.ldap.Aplicaciones;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -53,6 +55,15 @@ public class ServicioAccion extends Servicio implements CRUD<Acciones> {
 	    TypedQuery<Acciones> query = getEm().createQuery(cq);
 	    return query.getResultList();
 	}
+	public Acciones obtenerAccionPorId(int id) {
+        EntityManager em = getEntityManager();
 
+        try {
+            return em.find(Acciones.class, id);
+        } finally {
+            em.close();
+        }
+    }
+	
 }
 			
