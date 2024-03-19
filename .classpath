@@ -17,16 +17,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/LDAP"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/antlr-2.7.6 - Copy.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/antlr-2.7.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/cglib-2.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/hibernate3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/hibernate-jpa-2.0-api-1.0.0.Final.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/javassist-3.12.0.GA.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/hibernate_libs-20240208T033815Z-001/hibernate_libs/slf4j-api-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/fervr/Downloads/mysql-connector-java-8.0.29.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
