@@ -4,6 +4,8 @@ import java.util.Optional;
 import javax.persistence.TypedQuery;
 import java.util.List;
 import javax.persistence.EntityManager;
+
+import com.ulatina.ldap.Acciones;
 import com.ulatina.ldap.Aplicaciones;
 import com.ulatina.ldap.Herramientas;
 import com.ulatina.ldap.Usuarios;
@@ -58,5 +60,32 @@ public class ServicioHerramienta extends Servicio implements CRUD<Herramientas> 
 	    return query.getResultList();
 	}
 
+	public Herramientas obtenerHerramientaPorId(int id) {
+        EntityManager em = getEntityManager();
+
+        try {
+            return em.find(Herramientas.class, id);
+        } finally {
+            em.close();
+        }
+    }
 	
+	
+	public void insertarHerramientaAccion(Herramientas herramientaId, Acciones accionId) {
+        try {
+            getEm().getTransaction().begin();
+
+            // Crear la consulta SQL nativa para insertar en la tabla de asociación
+            String sql = "INSERT INTO herramienta_accion (herramienta_id, accion_id) VALUES (:herramientaId, :accionId)";
+            getEm().createNativeQuery(sql)
+                    .setParameter("herramientaId", herramientaId)
+                    .setParameter("accionId", accionId)
+                    .executeUpdate();
+
+            getEm().getTransaction().commit();
+        } catch (Exception e) {
+            getEm().getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
 }

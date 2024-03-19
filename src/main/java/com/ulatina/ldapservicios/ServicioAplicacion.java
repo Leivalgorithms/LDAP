@@ -5,6 +5,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import javax.persistence.EntityManager;
 import com.ulatina.ldap.Aplicaciones;
+import com.ulatina.ldap.Herramientas;
 import com.ulatina.ldap.Usuarios;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -68,7 +69,23 @@ public class ServicioAplicacion extends Servicio implements CRUD<Aplicaciones>{
             em.close();
         }
     }
+	public void insertarAplicacionHerramienta(Aplicaciones aplicacionId, Herramientas herramientaId) {
+        try {
+            getEm().getTransaction().begin();
 
+            // Crear la consulta SQL nativa para insertar en la tabla de asociación
+            String sql = "INSERT INTO aplicacion_herramienta (aplicacion_id, herramienta_id) VALUES (:aplicacionId, :herramientaId)";
+            getEm().createNativeQuery(sql)
+                    .setParameter("aplicacionId", aplicacionId)
+                    .setParameter("herramientaId", herramientaId)
+                    .executeUpdate();
+
+            getEm().getTransaction().commit();
+        } catch (Exception e) {
+            getEm().getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
 	
 
 }  
