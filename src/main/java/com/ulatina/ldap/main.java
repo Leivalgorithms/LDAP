@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import com.ulatina.ldapservicios.Servicio;
+import com.ulatina.ldapservicios.ServicioAccion;
 import com.ulatina.ldapservicios.ServicioAplicacion;
+import com.ulatina.ldapservicios.ServicioHerramienta;
 import com.ulatina.ldapservicios.ServicioUA;
 import com.ulatina.ldapservicios.ServicioUsuario;
 import java.util.Scanner;
@@ -35,26 +37,49 @@ public class main {
             Usuarios usuario = new Usuarios();
             Aplicaciones aplicacion = new Aplicaciones();
             ServicioUsuario servicioUsuario = new ServicioUsuario(em);
+            ServicioUsuario servicioUsuario1 = new ServicioUsuario(em);
             ServicioAplicacion servicioAplicacion = new ServicioAplicacion(em);
             //ServicioUA servicioUA = new ServicioUA();
-
+            Herramientas herramienta = new Herramientas();
+            ServicioHerramienta servicioHerramienta = new ServicioHerramienta(em);
+            Acciones accion = new Acciones();
+            ServicioAccion servicioAccion1 = new ServicioAccion(em);
+            
+            
           
-            usuario.setNOMBRE("Satan Gomez");
-            usuario.setDESCRIPCION("TECNICO");
+            usuario.setNOMBRE("Fernando Vargas");
+            usuario.setDESCRIPCION("Profesor");
             usuario.setESTADO(true);
             //servicioUsuario.insert(usuario);
             
-            aplicacion.setNOMBRE("Cadena de suministros");
-            aplicacion.setDESCRIPCION("App para gestionar la cadena de suministros");
+            aplicacion.setNOMBRE("Reportes");
+            aplicacion.setDESCRIPCION("App para gestionar los reportes");
             aplicacion.setESTADO(true);
             //servicioAplicacion.insert(aplicacion);
             //servicioAplicacion.delete(6);
             //servicioAplicacion.update(aplicacion);
-            aplicacion.setNOMBRE("Manufactura");
-            aplicacion.setDESCRIPCION("App para piso de produccion");
-            aplicacion.setESTADO(true);
-            //aplicacion.insert(aplicacion);
+            //aplicacion.setNOMBRE("Manufactura");
+            //aplicacion.setDESCRIPCION("App para piso de produccion");
+            //aplicacion.setESTADO(true);
+            //servicioAplicacion.insert(aplicacion);
+            herramienta.setNOMBRE("caca");
+            herramienta.setDESCRIPCION("Crea una caca");
+            herramienta.setESTADO(true);
+            //servicioHerramienta.insert(herramienta);
+            accion.setNOMBRE("palo");
+            accion.setDESCRIPCION("dcba");
+            accion.setESTADO(true);
+            //servicioAccion1.insert(accion);
             
+            Herramientas herramienta2 = servicioHerramienta.obtenerHerramientaPorId(2);
+            Acciones accns1 = servicioAccion1.obtenerAccionPorId(1);
+            //servicioHerramienta.insertarHerramientaAccion(herramienta2, accns1);
+            
+            
+            
+            //Herramientas herramienta1 = servicioHerramienta.obtenerHerramientaPorId(1);
+          	//Aplicaciones idapp1 =  servicioAplicacion.obtenerAplicacionPorId(2);
+          	//servicioAplicacion.insertarAplicacionHerramienta(idapp1, herramienta1);
             
             
             /*
@@ -85,12 +110,12 @@ public class main {
             */
             
             
-            Usuarios usuario1 = servicioUsuario.findUsuariosByNombreFetchApplications("Satan Gomez");
-           Aplicaciones idapp1 =  servicioAplicacion.obtenerAplicacionPorId(1);
-           Aplicaciones idapp2 =  servicioAplicacion.obtenerAplicacionPorId(2);
-           servicioUsuario.insertarUsuarioAplicacion(usuario1, idapp2);
+            //Usuarios usuario1 = servicioUsuario.findUsuariosByNombreFetchApplications("Satan Gomez");
+           //Aplicaciones idapp1 =  servicioAplicacion.obtenerAplicacionPorId(1);
+           //Aplicaciones idapp2 =  servicioAplicacion.obtenerAplicacionPorId(2);
+           //servicioUsuario.insertarUsuarioAplicacion(usuario1, idapp2);
             //int usuarioidx = usuario1.getID();
-            if(usuario1 != null) 
+            /*if(usuario1 != null) 
             {
             	//System.out.println("usuario1: "+ usuario1);
             	//Aplicaciones app1 = new Aplicaciones();
@@ -104,15 +129,18 @@ public class main {
                 //em.persist(usuario1); // Persiste el nuevo usuario en la base de datos
                 //em.getTransaction().commit();
             }else 
+            
             {
+            
             	System.out.println("No se encontro la entidad por el nombre proporcionado");
             	
             }
-
+        */
             
         } catch (Exception e) {
             e.printStackTrace();
         } 
+       
     }
 
 
