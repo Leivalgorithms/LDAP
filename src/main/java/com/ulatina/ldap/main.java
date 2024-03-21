@@ -45,7 +45,9 @@ public class main {
             Acciones accion = new Acciones();
             ServicioAccion servicioAccion1 = new ServicioAccion(em);
             
+            ServicioUsuario su = new ServicioUsuario(em);
             
+            su.demeUsuario(null, null);
           
             usuario.setNOMBRE("Fernando Vargas");
             usuario.setDESCRIPCION("Profesor");
