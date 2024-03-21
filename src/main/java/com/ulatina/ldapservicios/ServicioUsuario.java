@@ -16,6 +16,34 @@ public class ServicioUsuario extends Servicio implements CRUD<Usuarios> {
         super(em);
     }
 
+    public Usuarios demeUsuario(EntityManager em,String nombre, String contrasena) {
+        Usuarios usuario = null;
+        try {
+            // Inicia la transacción
+            getEm().getTransaction().begin();
+
+            TypedQuery<Usuarios> query = getEm().createNamedQuery("Usuario.findByNombreAndContrasena", Usuarios.class);
+            query.setParameter("nombre", nombre);
+            query.setParameter("contrasena", contrasena);
+
+            // Intenta obtener un solo resultado
+            usuario = query.getSingleResult();
+
+            // Cierra la transacción
+            getEm().getTransaction().commit();
+        } catch (NoResultException e) {
+            // No se encontró el usuario
+            usuario = null;
+            getEm().getTransaction().rollback();
+        } catch (Exception e) {
+            // Manejo de cualquier otra excepción
+            e.printStackTrace();
+            getEm().getTransaction().rollback();
+        }
+        return usuario;
+    }
+
+
     @Override
     public void insert(Usuarios t) {
         getEm().getTransaction().begin();
