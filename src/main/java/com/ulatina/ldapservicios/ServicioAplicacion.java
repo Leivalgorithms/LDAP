@@ -52,7 +52,7 @@ public class ServicioAplicacion extends Servicio implements CRUD<Aplicaciones>{
         CriteriaQuery<Aplicaciones> query = cb.createQuery(Aplicaciones.class);
         Root<Aplicaciones> root = query.from(Aplicaciones.class);
 
-        root.fetch("aplicaciones", JoinType.LEFT);
+        root.fetch("usuarios", JoinType.LEFT);
 
         query.select(root).where(cb.equal(root.get("NOMBRE"), nombre));
 
