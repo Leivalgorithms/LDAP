@@ -32,20 +32,26 @@ public class Aplicaciones implements Serializable {
     private String NOMBRE;
     private boolean ESTADO;
     private Integer GROUPID;
-
-    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "aplicacion_herramienta", 
-        joinColumns = @JoinColumn(name = "aplicacion_id"), 
-        inverseJoinColumns = @JoinColumn(name = "herramienta_id")
-    )
-    private Set<Herramientas> herramientas = new HashSet<>();
+    
+    @OneToMany(mappedBy="aplicacion", cascade = CascadeType.ALL)
+	private Set<AplicacionHerramienta> aplicacionherramienta1;
+	
+	private static final long serialVersionUID = 1L;
+   
     
     @ManyToMany(mappedBy = "aplicaciones")
     private List<Usuarios> usuarios = new ArrayList<>();
+   
+    
+    public Set<AplicacionHerramienta> getAplicacionherramienta1() {
+		return aplicacionherramienta1;
+	}
 
+	public void setAplicacionherramienta1(Set<AplicacionHerramienta> aplicacionherramienta1) {
+		this.aplicacionherramienta1 = aplicacionherramienta1;
+	}
 
-    public Integer getID() {
+	public Integer getID() {
         return this.ID;
     }
 
@@ -93,5 +99,11 @@ public class Aplicaciones implements Serializable {
     public void setUsuarios(List<Usuarios> usuarios) 
     {
     	this.usuarios = usuarios;
+    }
+    
+    
+    @Override
+    public String toString() {
+        return "Aplicaciones [ID=" + ID + ", NOMBRE=" + NOMBRE + ", DESCRIPCION=" + DESCRIPCION + ", ESTADO=" + ESTADO + "]";
     }
 }

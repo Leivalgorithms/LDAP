@@ -1,5 +1,8 @@
 package com.ulatina.ldapservicios;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -7,7 +10,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import javax.persistence.Query;
 import com.ulatina.ldap.Aplicaciones;
+import com.ulatina.ldap.Herramientas;
 import com.ulatina.ldap.Usuarios;
 
 public class ServicioUsuario extends Servicio implements CRUD<Usuarios> {
@@ -83,17 +88,17 @@ public class ServicioUsuario extends Servicio implements CRUD<Usuarios> {
         TypedQuery<Usuarios> typedQuery = getEm().createQuery(query);
         return typedQuery.getSingleResult();
     }
-
-
-    public void insertarUsuarioAplicacion(Usuarios idUsuario, Aplicaciones idAplicacion) {
+    
+    
+    public void insertarUsuarioAplicacion(Usuarios usuarioid, Aplicaciones aplicacionid) {
         try {
             getEm().getTransaction().begin();
 
             // Crear la consulta SQL nativa para insertar en la tabla de asociación
-            String sql = "INSERT INTO usuario_aplicacion (usuario_id, aplicacion_id) VALUES (:idUsuario, :idAplicacion)";
+            String sql = "INSERT INTO usuario_aplicacion (usuario_id, aplicacion_id) VALUES (:usuarioid, :aplicacionid)";
             getEm().createNativeQuery(sql)
-                    .setParameter("idUsuario", idUsuario)
-                    .setParameter("idAplicacion", idAplicacion)
+                    .setParameter("usuarioid", usuarioid)
+                    .setParameter("aplicacionid", aplicacionid)
                     .executeUpdate();
 
             getEm().getTransaction().commit();
@@ -102,6 +107,8 @@ public class ServicioUsuario extends Servicio implements CRUD<Usuarios> {
             e.printStackTrace();
         }
     }
+    
+
     
     public Usuarios login(String nombre, String contrasena) {
         
@@ -122,4 +129,48 @@ public class ServicioUsuario extends Servicio implements CRUD<Usuarios> {
         }
         return usuario;
     }
+    
+    public List<Object[]> perfilUsuario(String nombreUsuario, String contraseñaUsuario) {
+    	String sql = "SELECT aplicaciones.NOMBRE, usuarios.NOMBRE " +
+                "FROM usuarios JOIN usuario_aplicacion ON usuarios.ID = usuario_aplicacion.usuario_id " +
+                "JOIN aplicaciones ON aplicaciones.ID = usuario_aplicacion.aplicacion_id " +
+                "WHERE usuarios.NOMBRE = ?1 AND usuarios.CONTRASENA = ?2";
+
+       
+        
+        Query query = getEm().createNativeQuery(sql);
+        query.setParameter(1, nombreUsuario);
+        query.setParameter(2, contraseñaUsuario);
+        
+        List<Object[]> resultados = query.getResultList();     
+        
+     // Imprimir las aplicaciones asociadas al usuario
+        for (Object[] row : resultados) {
+            
+            String nombreUsuario1 = (String) row[1];
+            System.out.println("Nombre de usuario: " + nombreUsuario1);
+            String nombreAplicacion = (String) row[0];
+            System.out.println("Nombre de aplicacion: " + nombreAplicacion);
+            
+            System.out.println("---------------------------------------");
+        }
+        
+        return resultados;
+    }
+    
+    public Usuarios obtenerUsuarioConAplicaciones(String nombreUsuario, String contraseñaUsuario) {
+        Query query = getEm().createNamedQuery("obtenerUsuarioConAplicaciones");
+        query.setParameter("nombreUsuario", nombreUsuario);
+        query.setParameter("contraseñaUsuario", contraseñaUsuario);
+
+        try {
+            return (Usuarios) query.getSingleResult();
+        } catch (NoResultException e) {
+            // No se encontró ningún usuario con las credenciales proporcionadas
+            return null;
+        }
+    }
+
+
+
 }
