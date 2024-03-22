@@ -32,18 +32,30 @@ public class Herramientas implements Serializable {
 	private Integer GROUPID;
 	
 	
-	@ManyToMany(mappedBy = "herramientas")
-    private List<Aplicaciones> aplicaciaones = new ArrayList<>();
+	@OneToMany(mappedBy="herramienta", cascade = CascadeType.ALL)
+	private Set<AplicacionHerramienta> aplicacionherramienta;
 	
 	
+	public Set<AplicacionHerramienta> getAplicacionherramienta() {
+		return aplicacionherramienta;
+	}
+	public void setAplicacionherramienta(Set<AplicacionHerramienta> aplicacionherramienta) {
+		this.aplicacionherramienta = aplicacionherramienta;
+	}
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(
-	    name = "herramienta_accion", 
-	    joinColumns = @JoinColumn(name = "herramienta_id"), 
-	    inverseJoinColumns = @JoinColumn(name = "accion_id")
-	)
-	private Set<Acciones> acciones = new HashSet<>();
+	
+	@OneToMany(mappedBy="herramienta1", cascade = CascadeType.ALL)
+	private Set<HerramientaAccion> herramientaaccion;
+	
+
+	public Set<HerramientaAccion> getHerramientaaccion() {
+		return herramientaaccion;
+	}
+	public void setHerramientaaccion(Set<HerramientaAccion> herramientaaccion) {
+		this.herramientaaccion = herramientaaccion;
+	}
+	
+
 
 	private static final long serialVersionUID = 1L;
 
@@ -84,11 +96,5 @@ public class Herramientas implements Serializable {
 	public void setGROUPID(Integer gROUPID) {
 		GROUPID = gROUPID;
 	}
-	
-	public List<Aplicaciones> getAplicaciaones() {
-		return aplicaciaones;
-	}
-	public void setAplicaciaones(List<Aplicaciones> aplicaciaones) {
-		this.aplicaciaones = aplicaciaones;
-	}
+
 }
