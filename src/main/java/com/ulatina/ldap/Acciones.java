@@ -29,8 +29,11 @@ public class Acciones implements Serializable {
 	private boolean ESTADO;
 	private Integer GROUPID;
 	
-	@ManyToMany(mappedBy = "acciones", cascade = { CascadeType.ALL })
-	private Set<Herramientas> herramientas = new HashSet<>();
+
+	
+	@OneToMany(mappedBy="accion", cascade = CascadeType.ALL)
+	private Set<HerramientaAccion> herramientaaccion;
+
 	
 	private static final long serialVersionUID = 1L;
 
@@ -71,11 +74,12 @@ public class Acciones implements Serializable {
 	public void setGROUPID(Integer gROUPID) {
 		GROUPID = gROUPID;
 	}
-	public Set<Herramientas> getHerramientas() {
-		return herramientas;
+	public Set<HerramientaAccion> getHerramientaaccion() {
+		return herramientaaccion;
 	}
-	public void setHerramientas(Set<Herramientas> herramientas) {
-		this.herramientas = herramientas;
+	public void setHerramientaaccion(Set<HerramientaAccion> herramientaaccion) {
+		this.herramientaaccion = herramientaaccion;
 	}
+	
    
 }

@@ -23,6 +23,33 @@ import org.hibernate.annotations.FetchMode;
     @NamedQuery(name = "deleteUsuario", query = "DELETE FROM Usuarios a WHERE a.ID = :id"),
     @NamedQuery(name = "Usuario.findByNombreAndContrasena", query = "SELECT u FROM Usuarios u WHERE u.NOMBRE = :nombre AND u.CONTRASENA = :contrasena")
 })
+
+@NamedNativeQuery(
+	    name = "obtenerUsuarioConAplicaciones",
+	    query = "SELECT " +
+	                "u.*, " +
+	                "ap.*, " +
+	                "h.*, " +
+	                "ac.* " +
+	            "FROM " +
+	                "usuarios u " +
+	            "LEFT JOIN " +
+	                "usuario_aplicacion ua ON u.ID = ua.usuario_id " +
+	            "LEFT JOIN " +
+	                "aplicaciones ap ON ua.aplicacion_id = ap.ID " +
+	            "LEFT JOIN " +
+	                "aplicacionherramienta ah ON ap.ID = ah.idaplicacion AND ah.idusuario = u.ID " +
+	            "LEFT JOIN " +
+	                "herramientas h ON ah.idherramienta = h.ID " +
+	            "LEFT JOIN " +
+	                "herramientaaccion ha ON h.ID = ha.idherramienta AND ha.idusuario = u.ID " +
+	            "LEFT JOIN " +
+	                "acciones ac ON ha.idaccion = ac.ID " +
+	            "WHERE " +
+	                "u.NOMBRE = :nombreUsuario AND u.CONTRASENA = :contraseñaUsuario",
+	    resultClass = Usuarios.class
+	)
+
 @Entity
 public class Usuarios implements Serializable {
 
@@ -101,8 +128,13 @@ public class Usuarios implements Serializable {
 	public String getContrasena() {
 		return CONTRASENA;
 	}
-	public void setContrasena(String contrasena) {
-		this.CONTRASENA = contrasena;
+	public void setContrasena(String CONTRASENA) {
+		this.CONTRASENA = CONTRASENA;
+	}
+	
+	@Override
+	public String toString() {
+	    return "Usuarios [ID=" + ID + ", NOMBRE=" + NOMBRE + ", DESCRIPCION=" + DESCRIPCION + ", ESTADO=" + ESTADO + "]";
 	}
    
 }
